@@ -1,3 +1,7 @@
+require(`dotenv`).config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Projects`,
@@ -31,6 +35,17 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `GitHub`,
+        fieldName: `github`,
+        url: `https://api.github.com/graphql`,
+        headers: {
+          Authorization: `Bearer ${process.env.GATSBY_GITHUB_TOKEN}`,
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
