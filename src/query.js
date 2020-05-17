@@ -4,19 +4,35 @@ export const usePinnedReposQuery = () => {
   const {
     github: {
       user: {
-        repositories: { nodes },
+        pinnedItems: { nodes },
       },
     },
   } = useStaticQuery(graphql`
     query {
       github {
         user(login: "lu4ezar") {
-          repositories(first: 4) {
+          pinnedItems(first: 4) {
             nodes {
-              id
-              name
-              description
-              url
+              ... on GitHub_Repository {
+                id
+                name
+                description
+                url
+                homepageUrl
+                primaryLanguage {
+                  color
+                  name
+                }
+                repositoryTopics(first: 10) {
+                  nodes {
+                    topic {
+                      id
+                      name
+                    }
+                    url
+                  }
+                }
+              }
             }
           }
         }
