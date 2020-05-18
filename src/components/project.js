@@ -27,6 +27,7 @@ const Project = ({ project }) => {
           className={styles.primaryLanguage}
           style={{
             background: primaryLanguage.color,
+            color: primaryLanguage.name === "TypeScript" ? `#fff` : `inherit`,
           }}
         >
           {shortenLangName(primaryLanguage.name)}
