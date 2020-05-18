@@ -9,9 +9,17 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      {pinnedRepos.map(repo => (
-        <Project key={repo.id} project={repo} />
-      ))}
+      <div
+        style={{
+          display: `flex`,
+          flexWrap: `wrap`,
+          justifyContent: `space-around`,
+        }}
+      >
+        {pinnedRepos.map(repo => (
+          <Project key={repo.id} project={repo} />
+        ))}
+      </div>
     </Layout>
   )
 }
