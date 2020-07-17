@@ -11,6 +11,17 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [process.env.GA_TRACKING_ID],
+        gtagConfig: {
+          anonymize_ip: true,
+          cookie_expires: 0,
+        },
+        pluginConfig: { head: true },
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
