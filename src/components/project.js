@@ -1,4 +1,5 @@
 import React from "react"
+import { OutboundLink } from "gatsby-plugin-google-gtag"
 import styles from "./project.module.css"
 import shortenLangName from "../utils/shortenLangName"
 
@@ -18,9 +19,9 @@ const Project = ({ project }) => {
         <div>
           <div className={styles.name}>{name}</div>
           <div className={styles.links}>
-            <a href={url}>repo</a>
+            <OutboundLink href={url}>repo</OutboundLink>
             <span> | </span>
-            <a href={homepageUrl}>deploy</a>
+            <OutboundLink href={homepageUrl}>deploy</OutboundLink>
           </div>
         </div>
         <div
