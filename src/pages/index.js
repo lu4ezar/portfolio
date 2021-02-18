@@ -6,6 +6,7 @@ import { usePinnedReposQuery } from "../query"
 
 const IndexPage = () => {
   const pinnedRepos = usePinnedReposQuery()
+  const [selectedCard, setSelectedCard] = React.useState(null)
   return (
     <Layout>
       <SEO title="Home" />
@@ -13,11 +14,16 @@ const IndexPage = () => {
         style={{
           display: `flex`,
           flexWrap: `wrap`,
-          justifyContent: `space-around`,
+          justifyContent: `space-around`
         }}
       >
         {pinnedRepos.map(repo => (
-          <Project key={repo.id} project={repo} />
+          <Project
+            key={repo.id}
+            project={repo}
+            selected={repo.id === selectedCard}
+            select={() => setSelectedCard(repo.id)}
+          />
         ))}
       </div>
     </Layout>
