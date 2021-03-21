@@ -4,9 +4,9 @@ export const usePinnedReposQuery = () => {
   const {
     github: {
       user: {
-        pinnedItems: { nodes },
-      },
-    },
+        pinnedItems: { nodes }
+      }
+    }
   } = useStaticQuery(graphql`
     query {
       github {

@@ -1,20 +1,32 @@
 .container {
   display: flex;
+  gap: 1.45rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.container__repo {
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   width: 35vmin;
   height: 35vmin;
   min-width: 350px;
   min-height: 350px;
-  margin: 1.45rem 0;
   padding: 1.45rem;
   border-radius: 2px;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   position: relative;
-  background-color: rgb(255, 255, 255, 0.8) !important;
   background-blend-mode: color;
   background: center / contain no-repeat url("../images/bg.png");
+  background-color: hsla(0, 0%, 94.1%, 0.8);
+  cursor: pointer;
+}
+
+.container__repo.selected {
+  box-shadow: 1px 1px 5px 3px #9faec5;
 }
 
 .name {
@@ -30,12 +42,13 @@
 
 .description {
   font-size: 2rem;
+  position: relative;
 }
 
 .primaryLanguage {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  place-content: center;
+  place-items: center;
   margin-left: auto;
   border-radius: 50%;
   flex-shrink: 0;
@@ -48,16 +61,18 @@
 
 .links {
   flex: 1 1 100%;
-  justify-content: center;
+  display: flex;
   font-weight: normal;
 }
 
 .topic_container {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
 }
 
 .topic {
+  position: relative;
   transform: rotate(-0deg);
   display: inline-block;
   font-size: 12px;
