@@ -1,10 +1,56 @@
 import React from "react"
 import { OutboundLink } from "gatsby-plugin-google-gtag"
-import styles from "./project.module.css"
+import styles from "../styles/project.module.css"
 import shortenLangName from "../utils/shortenLangName"
-import { AnimateSharedLayout, motion } from "framer-motion"
+import { motion } from "framer-motion"
 
-const Project = ({ project, selected, select }) => {
+const Project = ({ project, onClick, selected, className }) => {
+  const items = {
+    visible: {
+      top: 0,
+      transition: {
+        type: "spring",
+        stiffness: 250,
+      },
+    },
+    hidden: {
+      top: "100%",
+    },
+  }
+  const topicContainer = {
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.25,
+        delay: 0.4,
+        staggerChildren: 0.15,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      transition: {
+        duration: 0.25,
+        delay: 0.2,
+        staggerChildren: 0.25,
+      },
+    },
+  }
+  const desc = {
+    visible: {
+      top: 0,
+      transition: {
+        duration: 0.15,
+        delay: 0.15,
+      },
+    },
+    hidden: {
+      top: "30%",
+      transition: {
+        duration: 0.4,
+        delay: 0.15,
+      },
+    },
+  }
   const {
     id,
     name,
@@ -12,74 +58,65 @@ const Project = ({ project, selected, select }) => {
     homepageUrl,
     description,
     primaryLanguage,
-    repositoryTopics: { nodes: topics }
+    repositoryTopics: { nodes: topics },
   } = project
-
+  const classes = `${styles.container__repo} ${selected && styles.selected}`
   return (
     <motion.div
-      whileHover={{ scale: 1.1 }}
-      className={styles.container}
-      onClick={select}
-      transition={{
-        duration: 0.1
-      }}
+      className={classes}
+      onClick={onClick}
+      layoutId={`pr-${id}`}
+      whileHover={{ scale: 1.02 }}
     >
       <div className={styles.heading}>
         <div>
           <div className={styles.name}>{name}</div>
           <div className={styles.links}>
             <OutboundLink href={url}>repo</OutboundLink>
-            <span> | </span>
-            <OutboundLink href={homepageUrl}>deploy</OutboundLink>
+            <span style={{ margin: "0 .5rem", verticalAlign: "center" }}>
+              |
+            </span>
+            <OutboundLink href={homepageUrl}>view</OutboundLink>
           </div>
         </div>
         <div
           className={styles.primaryLanguage}
           style={{
             background: primaryLanguage.color,
-            color: primaryLanguage.name === "TypeScript" ? `#fff` : `inherit`
+            color: primaryLanguage.name === "TypeScript" ? `#fff` : `inherit`,
           }}
         >
           {shortenLangName(primaryLanguage.name)}
         </div>
       </div>
-      <AnimateSharedLayout>
-        <motion.div
-          layout
-          className={styles.description}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          {description}
-        </motion.div>
-        {selected && (
-          <motion.div
-            layout
-            initial={{
-              opacity: 0
-            }}
-            animate={{
-              opacity: 1
-            }}
-            exit={{
-              opacity: 0
-            }}
-            transition={{ duration: 0.4, delay: 0.25 }}
-            layoutId={`card-${id}`}
+      <motion.div
+        className={styles.description}
+        key="topics"
+        initial="hidden"
+        animate={selected ? "visible" : "hidden"}
+        variants={desc}
+      >
+        {description}
+      </motion.div>
+      <motion.div
+        className={styles.topic_container}
+        initial="hidden"
+        animate={selected ? "visible" : "hidden"}
+        variants={topicContainer}
+      >
+        {topics.map(({ topic: { id, name }, url: topicUrl }) => (
+          <motion.a
+            key={id}
+            whileHover={{ scale: 1.1 }}
+            href={topicUrl}
+            className={styles.topic}
+            initial="hidden"
+            variants={items}
           >
-            {topics.map(({ topic: { id, name }, url: topicUrl }) => (
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                key={id}
-                href={topicUrl}
-                className={styles.topic}
-              >
-                {name}
-              </motion.a>
-            ))}
-          </motion.div>
-        )}
-      </AnimateSharedLayout>
+            {name}
+          </motion.a>
+        ))}
+      </motion.div>
     </motion.div>
   )
 }
