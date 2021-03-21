@@ -110,7 +110,6 @@ const Project = ({ project, onClick, selected, className }) => {
             whileHover={{ scale: 1.1 }}
             href={topicUrl}
             className={styles.topic}
-            initial="hidden"
             variants={items}
           >
             {name}
