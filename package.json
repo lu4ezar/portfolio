@@ -6,7 +6,7 @@
 	"author": "Kyle Mathews <mathews.kyle@gmail.com>",
 	"dependencies": {
 		"gatsby": "4.22.0",
-		"framer-motion": "^6.5.1",
+		"framer-motion": "^7.5.1",
 		"gatsby-image": "3.11.0",
 		"gatsby-plugin-google-gtag": "4.22.0",
 		"gatsby-plugin-manifest": "4.22.0",
