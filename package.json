@@ -27,7 +27,7 @@
 		"typography-theme-irving": "0.16.19"
 	},
 	"devDependencies": {
-		"prettier": "3.0.3"
+		"prettier": "3.2.5"
 	},
 	"keywords": [
 		"gatsby"
